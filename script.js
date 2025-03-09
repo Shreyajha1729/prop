@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ Chat animation started...");
+
     const messages = [
         { text: "Suno 😐\nBss bohot hua", sender: "received", delay: 2000 },
         { text: "I", sender: "received", delay: 2000 },
@@ -25,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (index < messages.length) {
             let msgData = messages[index];
 
+            console.log(`📩 Processing message: ${msgData.text}`);
+
             // Show typing animation
             let typingIndicator = document.createElement("div");
             typingIndicator.classList.add("typing", msgData.sender);
@@ -33,16 +37,20 @@ document.addEventListener("DOMContentLoaded", function () {
             chatBox.scrollTop = chatBox.scrollHeight;
 
             setTimeout(() => {
+                console.log(`✅ Removing typing indicator...`);
+
                 chatBox.removeChild(typingIndicator);
 
                 // Create message bubble
                 let messageDiv = document.createElement("div");
                 messageDiv.classList.add("message", msgData.sender);
-                messageDiv.innerText = msgData.text; // Fixing text display
+                messageDiv.innerText = msgData.text; 
                 chatBox.appendChild(messageDiv);
 
                 chatBox.scrollTop = chatBox.scrollHeight;
                 index++;
+
+                console.log(`🎉 Message added: ${msgData.text}`);
 
                 setTimeout(addMessage, msgData.delay);
             }, 1000); // Typing delay
@@ -54,6 +62,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    console.log("✅ Chat animation started...");
     addMessage();
 });
