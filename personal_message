@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You, Mahesh ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="message-container">
+        <h2>Happy Anniversary, Mahesh ❤️</h2>
+        <p>Your personal message goes here...</p>
+        <button onclick="goBack()">Replay Chat</button>
+    </div>
+    <script>
+        function goBack() {
+            window.location.href = "index.html"; // WhatsApp-style swipe effect
+        }
+    </script>
+</body>
+</html>
