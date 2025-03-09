@@ -1,8 +1,8 @@
 const messages = [
     { text: "Suno 😐\nBss bohot hua", sender: "received", delay: 2000 },
     { text: "I", sender: "received", delay: 2000 },
-    { text: "Am cute", sender: "received", delay: 1500 },
     { text: "Aage 😅", sender: "sent", delay: 1500 },
+    { text: "Am cute", sender: "received", delay: 1500 },
     { text: "😂😂😂😂😂😂", sender: "sent", delay: 1500 },
     { text: "I like you 😅", sender: "received", delay: 1500 },
     { text: "Me too", sender: "sent", delay: 1500 },
