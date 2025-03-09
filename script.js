@@ -18,32 +18,38 @@ function addMessage() {
     if (index < messages.length) {
         let msgData = messages[index];
 
-        // Typing effect
+        // Typing effect indicator
         let typingIndicator = document.createElement("div");
         typingIndicator.classList.add("typing", msgData.sender);
         typingIndicator.innerHTML = "<span></span><span></span><span></span>";
         chatBox.appendChild(typingIndicator);
+        chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
 
         setTimeout(() => {
+            // Remove typing effect
             chatBox.removeChild(typingIndicator);
+
+            // Create message bubble
             let messageDiv = document.createElement("div");
             messageDiv.classList.add("message", msgData.sender);
-            messageDiv.textContent = msgData.text;
+            messageDiv.innerText = msgData.text; // Ensures proper formatting
             chatBox.appendChild(messageDiv);
-            messageDiv.style.display = "block";
-            chatBox.scrollTop = chatBox.scrollHeight;
+
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
             index++;
-            addMessage();
-        }, msgData.delay);
+
+            setTimeout(addMessage, msgData.delay);
+        }, 1000); // 1-second delay for typing effect
     } else {
         setTimeout(() => {
-            window.location.href = "personal_message.html"; // Transition to next page
+            console.log("Redirecting to personal_message.html...");
+            window.location.href = "personal_message.html";
         }, 2000);
     }
 }
 
-// Start chat animation on load
+// Auto-start on page load
 window.onload = () => {
-    document.addEventListener('click', playMusic);
+    console.log("Chat animation started...");
     addMessage();
 };
