@@ -42,8 +42,14 @@ function addMessage() {
     }
 }
 
+// Function to play music on user interaction
+function playMusic() {
+    document.getElementById("bg-music").play();
+    document.removeEventListener('click', playMusic);
+}
+
 // Start chat animation on load
 window.onload = () => {
-    document.getElementById("bg-music").play();
+    document.addEventListener('click', playMusic);
     addMessage();
 };
