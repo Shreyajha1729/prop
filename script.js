@@ -41,7 +41,6 @@ function addMessage() {
         }, 2000);
     }
 }
-}
 
 // Start chat animation on load
 window.onload = () => {
