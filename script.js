@@ -1,66 +1,47 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("✅ Chat animation started...");
+const messages = [
+    { text: "Suno 😐\nBss bohot hua", sender: "received", delay: 2000 },
+    { text: "I", sender: "received", delay: 2000 },
+    { text: "Am cute", sender: "received", delay: 1500 },
+    { text: "Aage 😅", sender: "sent", delay: 1500 },
+    { text: "😂😂😂😂😂😂", sender: "sent", delay: 1500 },
+    { text: "I like you 😅", sender: "received", delay: 1500 },
+    { text: "Me too", sender: "sent", delay: 1500 },
+    { text: "Byee", sender: "sent", delay: 1500 },
+    { text: "😐", sender: "received", delay: 1500 },
+];
 
-    const messages = [
-        { text: "Suno 😐\nBss bohot hua", sender: "received", delay: 2000 },
-        { text: "I", sender: "received", delay: 2000 },
-        { text: "Am cute", sender: "received", delay: 1500 },
-        { text: "Aage 😅", sender: "sent", delay: 1500 },
-        { text: "😂😂😂😂😂😂", sender: "sent", delay: 1500 },
-        { text: "😅", sender: "received", delay: 1500 },
-        { text: "I like you 😅", sender: "received", delay: 1500 },
-        { text: "Me too", sender: "sent", delay: 1500 },
-        { text: "Byee", sender: "sent", delay: 1500 },
-        { text: "😐", sender: "received", delay: 1500 },
-    ];
+const chatBox = document.getElementById("chat-box");
+let index = 0;
 
-    const chatBox = document.getElementById("chat-box");
+function addMessage() {
+    if (index < messages.length) {
+        let msgData = messages[index];
 
-    if (!chatBox) {
-        console.error("❌ ERROR: chat-box element not found in the HTML!");
-        return;
-    }
+        // Typing effect
+        let typingIndicator = document.createElement("div");
+        typingIndicator.classList.add("typing", msgData.sender);
+        typingIndicator.innerHTML = "<span></span><span></span><span></span>";
+        chatBox.appendChild(typingIndicator);
 
-    let index = 0;
-
-    function addMessage() {
-        if (index < messages.length) {
-            let msgData = messages[index];
-
-            console.log(`📩 Processing message: ${msgData.text}`);
-
-            // Show typing animation
-            let typingIndicator = document.createElement("div");
-            typingIndicator.classList.add("typing", msgData.sender);
-            typingIndicator.innerHTML = "<span></span><span></span><span></span>";
-            chatBox.appendChild(typingIndicator);
+        setTimeout(() => {
+            chatBox.removeChild(typingIndicator);
+            let messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", msgData.sender);
+            messageDiv.textContent = msgData.text;
+            chatBox.appendChild(messageDiv);
+            messageDiv.style.display = "block";
             chatBox.scrollTop = chatBox.scrollHeight;
-
-            setTimeout(() => {
-                console.log(`✅ Removing typing indicator...`);
-
-                chatBox.removeChild(typingIndicator);
-
-                // Create message bubble
-                let messageDiv = document.createElement("div");
-                messageDiv.classList.add("message", msgData.sender);
-                messageDiv.innerText = msgData.text; 
-                chatBox.appendChild(messageDiv);
-
-                chatBox.scrollTop = chatBox.scrollHeight;
-                index++;
-
-                console.log(`🎉 Message added: ${msgData.text}`);
-
-                setTimeout(addMessage, msgData.delay);
-            }, 1000); // Typing delay
-        } else {
-            setTimeout(() => {
-                console.log("✅ Redirecting to personal_message.html...");
-                window.location.href = "personal_message.html";
-            }, 2000);
-        }
+            index++;
+            addMessage();
+        }, msgData.delay);
+    } else {
+        setTimeout(() => {
+            window.location.href = "personal_message.html"; // Transition to next page
+        }, 2000);
     }
+}
 
+// Start chat animation on load
+window.onload = () => {
     addMessage();
-});
+};
